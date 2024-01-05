@@ -14,6 +14,11 @@ object ExamSpec
   property("A test that always passes (a sanity check)") = 
     forAll { (n: Int) => n == n }
 
+  property("Q1") = 
+    import Streaming.*
+    import laziness.LazyList
+    forAll { (l: List[Int]) => fViaRec(LazyList(l*)) == fViaFold(LazyList(l*)) }
+
 end ExamSpec
 
 object NullUpdatesSpecObj
