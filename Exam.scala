@@ -358,6 +358,6 @@ object RL:
   
   def updateWithLens[State, Action] (q: Q[State, Action], s: State, a: Action)
     (reward: Double, estimate: Double): Q[State, Action] =
-    ???
+    lens(s, a).modify(qsa => (1.0 - α) * qsa + α * (reward + γ * estimate))(q)
 
 end RL
