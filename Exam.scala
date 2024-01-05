@@ -320,8 +320,11 @@ object RL:
      * same as the input table.
      */
 
-    property("01 Null update on null table 2x3") = 
-      ???
+    property("01 Q8: Updates with estimate of 0 on 2x3 table") =
+      forAll (qGen(2, 3), Gen.choose(0, 1), Gen.choose(0, 2)) {
+        (q: Q[Int, Int], state: Int, action: Int) =>
+          update(q, state, action)(q(state)(action), 0) == q
+      }
 
   end NullUpdatesSpec
 
