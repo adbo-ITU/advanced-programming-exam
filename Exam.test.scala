@@ -52,6 +52,43 @@ object ExamSpec
           allLinesTheSame.run(s) == Right(true)
         }
     }
+
+  import adpro.Game.Alice
+  import adpro.Game.Bob
+  import adpro.Game.game
+  import adpro.Game.Player.*
+
+  given rng: spire.random.rng.SecureJava 
+    = spire.random.rng.SecureJava.apply
+
+  val M = 10_000
+  val Err = 0.05
+
+  def acceptableErr(actual: Double, expected: Double) = (actual - expected).abs <= Err
+
+  property("Q4/Q5: Bob against himself has 25% chance of winning") =
+    // Outcomes:
+    //  R P
+    //  P R
+    //  R R
+    //  P P
+    val pr = game(Bob, Bob).sample(M)
+    acceptableErr(pr.prMatching { case Some(P1) => }, 0.25)
+    acceptableErr(pr.prMatching { case Some(P2) => }, 0.25)
+    acceptableErr(pr.prMatching { case None => }, 0.5)
+
+  property("Q4/Q5: Alice against herself has 33% chance of winning") =
+    val pr = game(Alice, Alice).sample(M)
+    acceptableErr(pr.prMatching { case Some(P1) => }, 0.33)
+    acceptableErr(pr.prMatching { case Some(P2) => }, 0.33)
+    acceptableErr(pr.prMatching { case None => }, 0.33)
+
+  property("Q4/Q5: Alice against Bob has 33% chance of winning") =
+    val pr = game(Alice, Bob).sample(M)
+    acceptableErr(pr.prMatching { case Some(P1) => }, 0.33)
+    acceptableErr(pr.prMatching { case Some(P2) => }, 0.33)
+    acceptableErr(pr.prMatching { case None => }, 0.33)
+
 end ExamSpec
 
 object NullUpdatesSpecObj
