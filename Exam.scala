@@ -116,7 +116,7 @@ object Parsing:
       .map { (h,t) => h::t }
 
   lazy val longestLine: Parser[Int] = 
-    ???
+    parser.map(lines => lines.map(_.length).max)
 
 
   /* QUESTION 3 ######################################################
