@@ -127,7 +127,7 @@ object Parsing:
    * NB. This question does not require that you answered QUESTION 2.
    */
 
-  lazy val allLinesTheSame: Parser[Boolean] = 
+  val allLinesTheSame: Parser[Boolean] =
     parser.map(lines => lines.groupBy(_.length).size == 1)
 
 end Parsing
@@ -215,7 +215,7 @@ object Game:
     = spire.random.rng.SecureJava.apply
 
   lazy val aliceFraction: Double = 
-    ???
+    game(Alice, Bob).sample(10_000).prMatching { case Some(P1) => }
 
 end Game
 
