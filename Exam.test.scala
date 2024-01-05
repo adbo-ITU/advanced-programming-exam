@@ -89,6 +89,9 @@ object ExamSpec
     acceptableErr(pr.prMatching { case Some(P2) => }, 0.33)
     acceptableErr(pr.prMatching { case None => }, 0.33)
 
+  property("Q6: Alice's fraction against Bob is 33%") =
+    acceptableErr(adpro.Game.aliceFraction, 0.33)
+
 end ExamSpec
 
 object NullUpdatesSpecObj
