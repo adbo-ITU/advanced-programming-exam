@@ -82,8 +82,8 @@ object ExamSpec
     //  R R - Draw
     //  P P - Draw
     val pr = game(Bob, Bob).sample(M)
-    acceptableErr(pr.prMatching { case Some(P1) => }, 0.25)
-    acceptableErr(pr.prMatching { case Some(P2) => }, 0.25)
+    acceptableErr(pr.prMatching { case Some(P1) => }, 0.25) &&
+    acceptableErr(pr.prMatching { case Some(P2) => }, 0.25) &&
     acceptableErr(pr.prMatching { case None => }, 0.5)
 
   property("Q4/Q5: Alice against herself has 33% chance of winning") =
@@ -98,8 +98,8 @@ object ExamSpec
     // S P - P1
     // S S - Draw
     val pr = game(Alice, Alice).sample(M)
-    acceptableErr(pr.prMatching { case Some(P1) => }, 0.33)
-    acceptableErr(pr.prMatching { case Some(P2) => }, 0.33)
+    acceptableErr(pr.prMatching { case Some(P1) => }, 0.33) &&
+    acceptableErr(pr.prMatching { case Some(P2) => }, 0.33) &&
     acceptableErr(pr.prMatching { case None => }, 0.33)
 
   property("Q4/Q5: Alice and Bob against each other both have 33% chance of winning") =
@@ -111,8 +111,8 @@ object ExamSpec
     // S R - P2
     // S P - P1
     val pr = game(Alice, Bob).sample(M)
-    acceptableErr(pr.prMatching { case Some(P1) => }, 0.33)
-    acceptableErr(pr.prMatching { case Some(P2) => }, 0.33)
+    acceptableErr(pr.prMatching { case Some(P1) => }, 0.33) &&
+    acceptableErr(pr.prMatching { case Some(P2) => }, 0.33) &&
     acceptableErr(pr.prMatching { case None => }, 0.33)
 
   property("Q6: Alice's fraction against Bob is 33%") =
