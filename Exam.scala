@@ -302,7 +302,7 @@ object RL:
      */
 
     property("00 Null update on null table 2x3") = 
-      ???
+      update(qZero(2, 3), 0, 0)(0, 0) == qZero(2, 3)
 
 
 
