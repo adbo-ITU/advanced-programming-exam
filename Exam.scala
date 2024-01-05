@@ -181,10 +181,10 @@ object Game:
   type Strategy = Dist[Move]
 
   lazy val Alice: Strategy =
-    ???
+    Pigaro.uniform(Rock, Paper, Scissors)
 
   lazy val Bob: Strategy =
-    ???
+    Pigaro.bernoulli(0.5, Rock, Paper)
 
 
 
