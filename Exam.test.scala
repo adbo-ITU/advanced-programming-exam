@@ -19,16 +19,25 @@ object ExamSpec
     import laziness.LazyList
     forAll { (l: List[Int]) => fViaRec(LazyList(l*)) == fViaFold(LazyList(l*)) }
 
-  property("Q2: longestLine") =
-    import Parsing.{longestLine, allLinesTheSame}
-    import adpro.parsing.Sliceable.*
+  import Parsing.{longestLine, allLinesTheSame}
+  import adpro.parsing.Sliceable.*
 
+  property("Q2: longestLine example") =
+    longestLine.run("1,2,3 , 5,4\n42,42") == Right(5)
+
+  property("Q2: longestLine") =
     forAll { (l: List[List[Int]]) =>
       (l.nonEmpty && l.forall(_.length > 0)) ==> {
         val s = l.map(_.mkString(",")).mkString("\n")
         Right(l.map(_.length).max) == longestLine.run(s)
       }
     }
+
+  property("Q3: allLinesTheSame example") =
+    allLinesTheSame.run("1,2,3 , 5,4\n42,42") == Right(false)
+
+  property("Q3: hardcoded allLinesTheSame true case") =
+    allLinesTheSame.run("1,2,3\n420, 42,42") == Right(true)
 
   property("Q3: allLinesTheSame with different length lines") =
     import Parsing.{longestLine, allLinesTheSame}
