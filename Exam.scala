@@ -198,7 +198,7 @@ object Game:
    * Answering QUESTION 4 is not required to answer this one.
    */
   def game (player1: Strategy, player2: Strategy): Dist[Result] =
-    ???
+    (player1 -> player2).map(winner(_, _))
 
 
 
