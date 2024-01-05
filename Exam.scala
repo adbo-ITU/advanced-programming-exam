@@ -72,6 +72,7 @@ object Streaming:
     doRec (l,0)
 
 
+  // Count the number of odd integers in the lazy list (and thereby forcing it)
   def fViaFold (l: LazyList[Int]): Int = 
     l.foldLeft(0)((z, cur) => if cur % 2 == 1 then z + 1 else z)
 
