@@ -127,8 +127,8 @@ object Parsing:
    * NB. This question does not require that you answered QUESTION 2.
    */
 
-  val allLinesTheSame: Parser[Boolean] = 
-    ???
+  lazy val allLinesTheSame: Parser[Boolean] = 
+    parser.map(lines => lines.groupBy(_.length).size == 1)
 
 end Parsing
 
