@@ -92,6 +92,16 @@ object ExamSpec
   property("Q6: Alice's fraction against Bob is 33%") =
     acceptableErr(adpro.Game.aliceFraction, 0.33)
 
+  property("Q9: Update with lens is identical to update without lens") =
+    import adpro.RL
+
+    forAll (RL.qGen(2, 3), Gen.choose(0, 1), Gen.choose(0, 2), Gen.double) {
+      (q: RL.Q[Int, Int], state: Int, action: Int, est: Double) =>
+        val noLens = RL.update(q, state, action)(q(state)(action), est)
+        val withLens = RL.updateWithLens(q, state, action)(q(state)(action), est)
+        noLens == withLens
+    }
+
 end ExamSpec
 
 object NullUpdatesSpecObj
